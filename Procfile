@@ -1,0 +1,1 @@
+web: gunicorn bot:get_web_app -c gunicorn_conf.py
