@@ -7,7 +7,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher.webhook import get_new_configured_app
 from lxml import etree
 
-TOKEN = os.getenv('TOKEN')  # Press "Reveal Config Vars" in settings tab on heroku and set TOKEN variable
+TOKEN = os.getenv('TOKEN', '')  # Press "Reveal Config Vars" in settings tab on heroku and set TOKEN variable
 
 WEBHOOK_HOST = 'https://aiogram-example.herokuapp.com/'  # Enter here your link from heroku project settings
 WEBHOOK_URL_PATH = '/webhook/' + TOKEN
