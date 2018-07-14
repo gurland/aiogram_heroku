@@ -5,6 +5,7 @@ from random import choice
 import aiohttp
 from aiohttp import web
 from aiogram import Bot, Dispatcher, types
+from aiogram.utils import context
 from aiogram.dispatcher.webhook import get_new_configured_app
 from lxml import etree
 
@@ -58,4 +59,5 @@ async def process_callback_data(callback_query: types.CallbackQuery):
 
 if __name__ == '__main__':
     app = get_new_configured_app(dispatcher=dp, path=WEBHOOK_URL_PATH)
+    dp.loop.set_task_factory(context.task_factory)
     web.run_app(app, host='0.0.0.0', port=os.getenv('PORT'))
