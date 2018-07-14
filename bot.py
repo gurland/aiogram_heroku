@@ -42,12 +42,14 @@ async def get_random_bash_quote():
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
+    """Handle start command"""
     random_quote = await get_random_bash_quote()
     await message.reply(random_quote, reply_markup=inline_keyboard)
 
 
 @dp.callback_query_handler(func=lambda cb: True)
 async def process_callback_data(callback_query: types.CallbackQuery):
+    """Handle all callback data which is being sent to bot"""
     action = callback_query.data
 
     if action == 'refresh':
@@ -58,6 +60,7 @@ async def process_callback_data(callback_query: types.CallbackQuery):
 
 
 if __name__ == '__main__':
+    # Create aiohttp.web.Application with configured route for webhook path
     app = get_new_configured_app(dispatcher=dp, path=WEBHOOK_URL_PATH)
     dp.loop.set_task_factory(context.task_factory)
     web.run_app(app, host='0.0.0.0', port=os.getenv('PORT'))
