@@ -3,7 +3,9 @@ from urllib.parse import urljoin
 from random import choice
 
 import aiohttp
+from aiohttp import web
 from aiogram import Bot, Dispatcher, types
+from aiogram.dispatcher.webhook import get_new_configured_app
 from lxml import etree
 
 TOKEN = os.getenv('TOKEN')  # Press "Reveal Config Vars" in settings tab on heroku and set TOKEN variable
@@ -53,3 +55,7 @@ async def process_callback_data(callback_query: types.CallbackQuery):
         random_quote = await get_random_bash_quote()
         await bot.edit_message_text(random_quote, chat_id, message_id, reply_markup=inline_keyboard)
 
+
+if __name__ == '__main__':
+    app = get_new_configured_app(dispatcher=dp, path=WEBHOOK_URL_PATH)
+    web.run_app(app, host='0.0.0.0', port=os.getenv('PORT'))
