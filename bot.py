@@ -3,6 +3,7 @@ from urllib.parse import urljoin
 from random import choice
 
 import aiohttp
+from aiohttp import web
 from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher.webhook import get_new_configured_app
 from lxml import etree
@@ -57,4 +58,9 @@ async def process_callback_data(callback_query: types.CallbackQuery):
 
 async def get_web_app():
     app = get_new_configured_app(dp, WEBHOOK_URL_PATH)
+    app.add_routes([web.get('/', test)])
     return app
+
+
+async def test(request):
+    return web.Response(text="Hello, world")
