@@ -1,3 +1,4 @@
 aiogram
 aiohttp
 lxml
+gunicorn
