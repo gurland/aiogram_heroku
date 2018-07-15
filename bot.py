@@ -18,7 +18,7 @@ WEBHOOK_URL = urljoin(WEBHOOK_HOST, WEBHOOK_URL_PATH)
 
 # Inline keyboard initialization with one refresh button
 inline_keyboard = types.InlineKeyboardMarkup()
-random_button = types.InlineKeyboardButton('Получить случайную запись', callback_data='refresh')
+random_button = types.InlineKeyboardButton('Получить случайную цитату', callback_data='refresh')
 inline_keyboard.add(random_button)
 
 bot = Bot(TOKEN)
