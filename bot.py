@@ -9,9 +9,10 @@ from aiogram.utils import context
 from aiogram.dispatcher.webhook import get_new_configured_app
 from lxml import etree
 
-TOKEN = os.getenv('TOKEN')  # Press "Reveal Config Vars" in settings tab on heroku and set TOKEN variable
+TOKEN = os.getenv('TOKEN', '')  # Press "Reveal Config Vars" in settings tab on heroku and set TOKEN variable
+PROJECT_NAME = os.getenv('PROJECT_NAME', 'aiogram-example')  # Set it as you've set TOKEN env var
 
-WEBHOOK_HOST = 'https://aiogram-example.herokuapp.com/'  # Enter here your link from heroku project settings
+WEBHOOK_HOST = f'https://{PROJECT_NAME}.herokuapp.com/'  # Enter here your link from heroku project settings
 WEBHOOK_URL_PATH = '/webhook/' + TOKEN
 WEBHOOK_URL = urljoin(WEBHOOK_HOST, WEBHOOK_URL_PATH)
 
@@ -63,4 +64,4 @@ if __name__ == '__main__':
     # Create aiohttp.web.Application with configured route for webhook path
     app = get_new_configured_app(dispatcher=dp, path=WEBHOOK_URL_PATH)
     dp.loop.set_task_factory(context.task_factory)
-    web.run_app(app, host='0.0.0.0', port=os.getenv('PORT'))
+    web.run_app(app, host='0.0.0.0', port=os.getenv('PORT'))  # Heroku stores port you have to listen in your app
